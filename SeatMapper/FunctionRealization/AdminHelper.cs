@@ -42,10 +42,10 @@ public static class AdminHelper
 
         ProcessStartInfo startInfo = new ProcessStartInfo
         {
-            UseShellExecute = true,       
+            UseShellExecute = true,
             WorkingDirectory = Environment.CurrentDirectory,
             FileName = exePath,
-            Verb = "runas"                  
+            Verb = "runas"
         };
 
         string[] args = Environment.GetCommandLineArgs();

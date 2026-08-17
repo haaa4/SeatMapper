@@ -10,12 +10,6 @@
 //  * This program is distributed in the hope that it will be useful,
 //  * but WITHOUT ANY WARRANTY
 
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SeatMapper
@@ -25,6 +19,5 @@ namespace SeatMapper
     /// </summary>
     public partial class App : Application
     {
-        
     }
 }

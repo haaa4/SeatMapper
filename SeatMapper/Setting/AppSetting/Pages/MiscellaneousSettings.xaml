@@ -56,7 +56,6 @@
                         Text="SeatMapper将以改日所在的周作为第一周，来计算当前周数"
                         TextWrapping="WrapWithOverflow" />
                 </StackPanel>
-
             </ui:CardControl.Header>
             <ui:CalendarDatePicker
                 x:Name="SemesterStartDatePicker"
@@ -79,7 +78,6 @@
                         Text="SeatMapper计算座位表时试错的最大次数"
                         TextWrapping="WrapWithOverflow" />
                 </StackPanel>
-
             </ui:CardControl.Header>
             <ui:NumberBox
                 x:Name="AttemptsTimes"
@@ -103,9 +101,8 @@
                 Text="SeatMapper在调用github仓库资源，会连接使用Gitee的镜像资源，一定程度上解决Github国内连接不稳的问题"
                 TextWrapping="WrapWithOverflow" />
                 </StackPanel>
-
             </ui:CardControl.Header>
-            <ui:ToggleSwitch x:Name="GiteeMode" OffContent="关" OnContent="开" Click="GiteeMode_Click"/>
+            <ui:ToggleSwitch x:Name="GiteeMode" OffContent="关" OnContent="开" Click="GiteeMode_Click" />
         </ui:CardControl>
     </StackPanel>
 </Page>

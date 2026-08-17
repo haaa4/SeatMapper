@@ -7,10 +7,9 @@
         mc:Ignorable="d"
         Title="选择以继续" Height="350" Width="600" ShowInTaskbar="False" Topmost="True" ResizeMode="NoResize" Closing="Window_Closing">
     <StackPanel Margin="20">
-        <TextBlock Text="This is title" FontSize="30" TextWrapping="Wrap" x:Name="TitleTextBlock"/>
+        <TextBlock Text="This is title" FontSize="30" TextWrapping="Wrap" x:Name="TitleTextBlock" />
         <ListBox x:Name="SelectionListBox" Margin="0,20,0,20" Height="150">
-
         </ListBox>
-        <Button Content="继续" Click="Button_Click"/>
+        <Button Content="继续" Click="Button_Click" />
     </StackPanel>
 </Window>

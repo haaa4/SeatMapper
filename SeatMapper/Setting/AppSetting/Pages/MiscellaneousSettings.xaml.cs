@@ -35,7 +35,7 @@ namespace SeatMapper.Setting.AppSetting.Pages
         {
             InitializeComponent();
             AppThemeComboBox.SelectedIndex = GlobalVariables.json.AppTheme;
-            SemesterStartDatePicker.Date=GlobalVariables.json.SemesterStartDate ?? DateTime.Now.Date;
+            SemesterStartDatePicker.Date = GlobalVariables.json.SemesterStartDate ?? DateTime.Now.Date;
             AttemptsTimes.Value = GlobalVariables.json.MaximumNumberOfAttempts;
             GiteeMode.IsChecked = GlobalVariables.json.GiteeMode ?? false;
             isInitialized = true;
@@ -61,11 +61,11 @@ namespace SeatMapper.Setting.AppSetting.Pages
                     SystemThemeWatcher.UnWatch(Application.Current.MainWindow);
                     if (AppThemeComboBox.SelectedIndex == 1)
                     {
-                        ApplicationThemeManager.Apply(ApplicationTheme.Light,WindowBackdropType.Tabbed);
+                        ApplicationThemeManager.Apply(ApplicationTheme.Light, WindowBackdropType.Tabbed);
                     }
                     else if (AppThemeComboBox.SelectedIndex == 2)
                     {
-                        ApplicationThemeManager.Apply(ApplicationTheme.Dark,WindowBackdropType.Tabbed);
+                        ApplicationThemeManager.Apply(ApplicationTheme.Dark, WindowBackdropType.Tabbed);
                     }
                 }
             }
@@ -91,7 +91,6 @@ namespace SeatMapper.Setting.AppSetting.Pages
 
         private void SemesterStartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

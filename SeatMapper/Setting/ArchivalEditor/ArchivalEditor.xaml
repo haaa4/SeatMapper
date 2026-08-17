@@ -16,7 +16,7 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ui:TitleBar Title="档案编辑" Icon="{ui:ImageIcon /Image/icon.png}"/>
+        <ui:TitleBar Title="档案编辑" Icon="{ui:ImageIcon /Image/icon.png}" />
         <ui:NavigationView
             Grid.Row="1"
             IsBackButtonVisible="Collapsed"

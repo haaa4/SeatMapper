@@ -18,7 +18,6 @@
             VerticalAlignment="Top">
             <StackPanel>
                 <TextBlock Text="     在座位表中，部分单元格可以被替换成指定文字，用“/text1”等在表格模版中替换，SeatMapper会在生成时对指定单元格进行替换。{year}：当前年份 {month} :当前月份 {day}：当前日 {week}：当前周数 {hour}：当前时（24h制） {min}：当前分 {sec}：当前秒 {time}:完整时间 {name}：当前用户名 {male}：男生人数 {female}：女生人数 {person}：总人数" TextWrapping="Wrap" />
-
             </StackPanel>
         </ui:Card>
         <ui:Card

@@ -221,9 +221,7 @@
                             NavigateUri="https://github.com/lepoco/wpfui/tree/main" />
                     </StackPanel>
                 </Expander>
-
             </StackPanel>
         </Grid>
-
     </Grid>
 </Page>

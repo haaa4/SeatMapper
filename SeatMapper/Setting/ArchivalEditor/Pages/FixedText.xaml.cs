@@ -11,22 +11,10 @@
 //  * but WITHOUT ANY WARRANTY
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Web.Helpers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Path = System.IO.Path;
 
 namespace SeatMapper.Setting.ArchivalEditor.Pages
@@ -38,7 +26,6 @@ namespace SeatMapper.Setting.ArchivalEditor.Pages
     {
         public FixedText()
         {
-
             InitializeComponent();
             if (GlobalVariables.json.FixedText1 != null)
                 Text1.Text = GlobalVariables.json.FixedText1;

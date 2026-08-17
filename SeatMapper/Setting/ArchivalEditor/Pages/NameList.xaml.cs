@@ -10,25 +10,13 @@
 //  * This program is distributed in the hope that it will be useful,
 //  * but WITHOUT ANY WARRANTY
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Path= System.IO.Path;
+using Path = System.IO.Path;
 
 namespace SeatMapper.Setting.ArchivalEditor.Pages
 {
@@ -39,6 +27,7 @@ namespace SeatMapper.Setting.ArchivalEditor.Pages
     {
         public ObservableCollection<string> MaleNames { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> FemaleNames { get; set; } = new ObservableCollection<string>();
+
         public NameList()
         {
             InitializeComponent();
@@ -53,19 +42,19 @@ namespace SeatMapper.Setting.ArchivalEditor.Pages
             }
             if (MaleNames.Count == 0)
             {
-                MaleEmptyTextBlock.Visibility= Visibility.Visible;
+                MaleEmptyTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
-                MaleEmptyTextBlock.Visibility= Visibility.Hidden;
+                MaleEmptyTextBlock.Visibility = Visibility.Hidden;
             }
-            if(FemaleNames.Count == 0)
+            if (FemaleNames.Count == 0)
             {
-                FemaleEmptyTextBlock.Visibility= Visibility.Visible;
+                FemaleEmptyTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
-                FemaleEmptyTextBlock.Visibility= Visibility.Hidden;
+                FemaleEmptyTextBlock.Visibility = Visibility.Hidden;
             }
         }
 

@@ -18,23 +18,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using unvell.ReoGrid;
 using unvell.ReoGrid.IO;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using MessageBox = System.Windows.MessageBox;
 using MessageBoxButton = System.Windows.MessageBoxButton;
 using Path = System.IO.Path;
@@ -50,8 +39,8 @@ namespace SeatMapper
         {
             InitializeComponent();
             Refresh();
-
         }
+
         // 占位符类型
         public enum PlaceholderType
         {
@@ -81,6 +70,7 @@ namespace SeatMapper
         public static class RandomHelper
         {
             private static readonly Random _random = new Random();
+
             public static int StrictNext(int maxValue)  // 返回 [0, maxValue-1]
             {
                 lock (_random)
@@ -89,7 +79,9 @@ namespace SeatMapper
                 }
             }
         }
+
         private int RefreshMode = 0;
+
         /// <summary>
         /// 刷新所有资源
         /// </summary>
@@ -99,13 +91,13 @@ namespace SeatMapper
             grid.Visibility = Visibility.Hidden;
             //0 什么都不做 1 回退到表格模板 2 回退到生成前的表格
             int loadmode = 1;
-            if(RefreshMode ==1)
+            if (RefreshMode == 1)
             {
-                var selectionWindow = new FunctionRealization.SelectionWindow("如何初始化表格?", new List<string> { "回退到表格模板","保持现状" });
+                var selectionWindow = new FunctionRealization.SelectionWindow("如何初始化表格?", new List<string> { "回退到表格模板", "保持现状" });
                 selectionWindow.ShowDialog();
-                if(selectionWindow.SelectedIndex!=-1)
+                if (selectionWindow.SelectedIndex != -1)
                 {
-                    if(selectionWindow.SelectedIndex == 1)
+                    if (selectionWindow.SelectedIndex == 1)
                     {
                         loadmode = 0;
                     }
@@ -117,7 +109,7 @@ namespace SeatMapper
                     return;
                 }
             }
-            else if(RefreshMode ==2)
+            else if (RefreshMode == 2)
             {
                 var selectionWindow = new FunctionRealization.SelectionWindow("如何初始化表格?", new List<string> { "回退到表格模板", "回退到生成前的表格", "保持现状" });
                 selectionWindow.ShowDialog();
@@ -127,7 +119,7 @@ namespace SeatMapper
                     {
                         loadmode = 2;
                     }
-                    else if(selectionWindow.SelectedIndex == 2)
+                    else if (selectionWindow.SelectedIndex == 2)
                     {
                         loadmode = 0;
                     }
@@ -168,7 +160,7 @@ namespace SeatMapper
             try
             {
                 //添加男女名单
-                if(File.Exists(Path.Combine(GlobalVariables.DataPath, "男.txt")) == false)
+                if (File.Exists(Path.Combine(GlobalVariables.DataPath, "男.txt")) == false)
                 {
                     File.Create(Path.Combine(GlobalVariables.DataPath, "男.txt")).Close();
                 }
@@ -196,11 +188,11 @@ namespace SeatMapper
                 {
                     File.Create(Path.Combine(GlobalVariables.DataPath, "data.json")).Close();
                 }
-                if(File.ReadAllText(Path.Combine(GlobalVariables.DataPath, "data.json")).Length == 0)
+                if (File.ReadAllText(Path.Combine(GlobalVariables.DataPath, "data.json")).Length == 0)
                 {
                     File.WriteAllText(Path.Combine(GlobalVariables.DataPath, "data.json"), "{}");
                 }
-                string get=File.ReadAllText(Path.Combine(GlobalVariables.DataPath, "data.json"));
+                string get = File.ReadAllText(Path.Combine(GlobalVariables.DataPath, "data.json"));
                 GlobalVariables.json = JsonSerializer.Deserialize<Json>(get);
                 //加载模板文件
                 if (loadmode == 1)
@@ -233,7 +225,7 @@ namespace SeatMapper
             {
                 MessageBox.Show("初始化失败！\n" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshMode = 0;
-                CaseText.Text= "初始化失败!";
+                CaseText.Text = "初始化失败!";
                 return;
             }
             CaseText.Text = "就绪";
@@ -241,6 +233,7 @@ namespace SeatMapper
             GenerateButton.IsEnabled = true;
             SaveButton.IsEnabled = false;
         }
+
         /// <summary>
         /// 没有权限访问数据目录时尝试提高权限
         /// </summary>
@@ -275,7 +268,7 @@ namespace SeatMapper
             try
             {
                 GenerateButton.IsEnabled = false;
-                grid.Visibility=Visibility.Hidden;
+                grid.Visibility = Visibility.Hidden;
                 //先备份当前表格
                 grid.Save(Path.Combine(GlobalVariables.DataPath, "Backup.xlsx"), FileFormat.Excel2007);
                 int result = GenerateSeating();
@@ -339,6 +332,7 @@ namespace SeatMapper
                 MessageBox.Show($"保存失败：{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         /// <summary>
         /// 生成座位表：根据标记替换姓名，满足性别匹配、名字不重复、黑名单同桌距离约束。
         /// 同时支持固定文本替换：\Text1、\Text2、\Text3。
@@ -346,7 +340,6 @@ namespace SeatMapper
         /// <returns>成功返回 0，失败抛出异常</returns>
         public int GenerateSeating()
         {
-           
             // 1. 获取当前工作表
             var sheet = grid.CurrentWorksheet;
             if (sheet == null)
@@ -386,12 +379,15 @@ namespace SeatMapper
                             case "\\Text1":
                                 fixedText = ConvertFixedText(GlobalVariables.json?.FixedText1);
                                 break;
+
                             case "\\Text2":
                                 fixedText = ConvertFixedText(GlobalVariables.json?.FixedText2);
                                 break;
+
                             case "\\Text3":
                                 fixedText = ConvertFixedText(GlobalVariables.json?.FixedText3);
                                 break;
+
                             default:
                                 fixedText = null;
                                 break;
@@ -746,12 +742,11 @@ namespace SeatMapper
 
         private void grid_CurrentWorksheetChanged(object sender, EventArgs e)
         {
-            
         }
 
         private void grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(RefreshMode==0)
+            if (RefreshMode == 0)
             {
                 RefreshMode = 1;
             }
@@ -765,7 +760,6 @@ namespace SeatMapper
 
         private void FluentWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
             if (GlobalVariables.json.AppTheme == 0)
             {
                 SystemThemeWatcher.Watch(this, Wpf.Ui.Controls.WindowBackdropType.Tabbed);
@@ -832,12 +826,13 @@ namespace SeatMapper
                 ["{female}"] = GlobalVariables.FemaleList.Count.ToString(),
                 ["{person}"] = (GlobalVariables.MaleList.Count + GlobalVariables.FemaleList.Count).ToString()
             };
-            foreach(var item in dict)
+            foreach (var item in dict)
             {
-                set=set.Replace(item.Key, item.Value);
+                set = set.Replace(item.Key, item.Value);
             }
             return set;
         }
+
         /// <summary>
         /// 计算 targetDate 相对于 referenceDate 所在周为第1周的周数。
         /// </summary>
