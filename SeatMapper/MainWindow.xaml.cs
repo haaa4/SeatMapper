@@ -1,4 +1,16 @@
-﻿using Masuit.Tools;
+﻿// /*
+//  * SeatMapper
+//  * Copyright (C) 2026 haaa4
+//  *
+//  * This program is free software: you can redistribute it and/or modify
+//  * it under the terms of the GNU General Public License as published by
+//  * the Free Software Foundation, either version 3 of the License, or
+//  * (at your option) any later version.
+//  *
+//  * This program is distributed in the hope that it will be useful,
+//  * but WITHOUT ANY WARRANTY
+
+using Masuit.Tools;
 using SeatMapper.Setting.AppSetting;
 using SeatMapper.Setting.ArchivalEditor;
 using System;
@@ -753,6 +765,7 @@ namespace SeatMapper
 
         private void FluentWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            
             if (GlobalVariables.json.AppTheme == 0)
             {
                 SystemThemeWatcher.Watch(this, Wpf.Ui.Controls.WindowBackdropType.Tabbed);
@@ -769,6 +782,36 @@ namespace SeatMapper
                     ApplicationThemeManager.Apply(ApplicationTheme.Dark, WindowBackdropType.Tabbed);
                 }
             }
+            // 获取主屏幕工作区大小（已排除任务栏）
+            double maxWidth = SystemParameters.WorkArea.Width;
+            double maxHeight = SystemParameters.WorkArea.Height;
+
+            // 根据需求设置窗口大小，例如设为工作区的80%
+            this.MaxWidth = maxWidth;
+            this.MaxHeight = maxHeight;
+            this.Width = maxWidth * 0.8;
+            this.Height = maxHeight * 0.8;
+            // 1. 获取屏幕工作区大小（已排除任务栏，以 WPF 的 DIP 单位为准）
+            double screenWidth = SystemParameters.WorkArea.Width;
+            double screenHeight = SystemParameters.WorkArea.Height;
+            // 2. 获取窗口当前的实际大小（注意要用 ActualWidth/ActualHeight）
+            //    如果窗口尚未完成布局，可以强制调用 UpdateLayout() 或使用 Dispatcher
+            if (double.IsNaN(this.Width) || this.Width == 0)
+            {
+                // 如果 Width/Height 未显式设置，强制测量一次
+                this.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            }
+
+            double windowWidth = this.ActualWidth > 0 ? this.ActualWidth : this.Width;
+            double windowHeight = this.ActualHeight > 0 ? this.ActualHeight : this.Height;
+
+            // 3. 计算左上角坐标，确保窗口完全居中
+            this.Left = (screenWidth - windowWidth) / 2;
+            this.Top = (screenHeight - windowHeight) / 2;
+
+            // 4. 【安全保险】如果坐标出现负值或溢出，重置为0（避免跑到屏幕外）
+            if (this.Left < 0) this.Left = 0;
+            if (this.Top < 0) this.Top = 0;
         }
 
         private string ConvertFixedText(string text)

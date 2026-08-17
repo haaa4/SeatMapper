@@ -8,33 +8,38 @@
         xmlns:rg="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
         mc:Ignorable="d" ExtendsContentIntoTitleBar="True"
                  WindowBackdropType="Tabbed" Loaded="FluentWindow_Loaded"
-        
-        WindowStartupLocation="CenterScreen"
-        Title="SeatMapper" Height="1000" Width="1600">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <ui:ProgressRing IsIndeterminate="True" Grid.Row="1" Height="100" Width="100" />
-        <rg:ReoGridControl x:Name="grid" Grid.Row="1" SheetTabVisible="False" Visibility="Hidden" MouseDown="grid_MouseDown"/>
-        <ui:SnackbarPresenter x:Name="snackbarPresenter" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Right" Width="400"/>
-        <ui:TitleBar Title="SeatMapper" Icon="{ui:ImageIcon /Image/icon.png}"/>
-        <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="2">
-            <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ui:Button Content="生成座位表" Margin="20,0,0,0" Icon="{ui:SymbolIcon Symbol=Document20}" Click="GenerateButton_Click" x:Name="GenerateButton" Appearance="Primary" VerticalAlignment="Bottom"/>
-                <ui:Button Content="保存" Margin="180 0 0 0" Icon="{ui:SymbolIcon Symbol=Document20}" Click="SaveButton_Click" x:Name="SaveButton" Appearance="Success"/>
-                <ui:TextBlock Text="正在初始化..." HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="24" x:Name="CaseText"/>
-            </Grid>
-        </ui:Card>
-        <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="3">
-            <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-                <ui:Button Content="初始化" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ArrowCounterclockwise24}" Click="InitializeButton_Click" Appearance="Info"/>
-                <ui:Button Content="档案编辑" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ContactCardGroup24}" Click="Button_Click"/>
-                <ui:Button Content="应用设置" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=Settings24}" Click="Button_Click_1"/>
-            </StackPanel>
-        </ui:Card>
-    </Grid>
+        Title="SeatMapper" Height="864" Width="1536">
+    <Viewbox>
+        <Grid Height="864" Width="1536">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="1.2*"/>
+            </Grid.RowDefinitions>
+            <ui:ProgressRing IsIndeterminate="True" Grid.Row="1" Height="100" Width="100" />
+            <rg:ReoGridControl x:Name="grid" Grid.Row="1" SheetTabVisible="False" Visibility="Hidden" MouseDown="grid_MouseDown"/>
+            <ui:SnackbarPresenter x:Name="snackbarPresenter" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Right" Width="400"/>
+            <ui:TitleBar Title="SeatMapper" Icon="{ui:ImageIcon /Image/icon.png}"/>
+            <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="2">
+                <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ui:Button Content="生成座位表" Margin="20,0,0,0" Icon="{ui:SymbolIcon Symbol=Document20}" Click="GenerateButton_Click" x:Name="GenerateButton" Appearance="Primary" VerticalAlignment="Bottom"/>
+                    <ui:Button Content="保存" Margin="180 0 0 0" Icon="{ui:SymbolIcon Symbol=Document20}" Click="SaveButton_Click" x:Name="SaveButton" Appearance="Success"/>
+                    <ui:TextBlock Text="正在初始化..." HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="24" x:Name="CaseText"/>
+                </Grid>
+            </ui:Card>
+            <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="3">
+                <StackPanel Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal">
+                    <ui:Button Content="初始化" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ArrowCounterclockwise24}" Click="InitializeButton_Click" Appearance="Info"/>
+                    <ui:Button Content="档案编辑" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ContactCardGroup24}" Click="Button_Click"/>
+                    <ui:Button Content="应用设置" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=Settings24}" Click="Button_Click_1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="20 0 0 0">
+                <Run Text="V0.1 "/>
+                <Run Text="Copyright (C) 2026 haaa4 部分权利保留 LICENSE GPL-3.0"/>
+                    </TextBlock>
+                </StackPanel>
+            </ui:Card>
+        </Grid>
+    </Viewbox>
+    
 </ui:FluentWindow>

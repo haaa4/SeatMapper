@@ -1,4 +1,16 @@
-﻿using Masuit.Tools;
+﻿// /*
+//  * SeatMapper
+//  * Copyright (C) 2026 haaa4
+//  *
+//  * This program is free software: you can redistribute it and/or modify
+//  * it under the terms of the GNU General Public License as published by
+//  * the Free Software Foundation, either version 3 of the License, or
+//  * (at your option) any later version.
+//  *
+//  * This program is distributed in the hope that it will be useful,
+//  * but WITHOUT ANY WARRANTY
+
+using Masuit.Tools;
 using System;
 using System.IO;
 using System.Text.Json;
@@ -25,6 +37,7 @@ namespace SeatMapper.Setting.AppSetting.Pages
             AppThemeComboBox.SelectedIndex = GlobalVariables.json.AppTheme;
             SemesterStartDatePicker.Date=GlobalVariables.json.SemesterStartDate ?? DateTime.Now.Date;
             AttemptsTimes.Value = GlobalVariables.json.MaximumNumberOfAttempts;
+            GiteeMode.IsChecked = GlobalVariables.json.GiteeMode ?? false;
             isInitialized = true;
             if (AttemptsTimes.Value <= 10)
             {
@@ -92,6 +105,13 @@ namespace SeatMapper.Setting.AppSetting.Pages
         {
             if (!isInitialized) return;
             GlobalVariables.json.MaximumNumberOfAttempts = AttemptsTimes.Value.Value.ToInt32();
+            SaveJson();
+        }
+
+        private void GiteeMode_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isInitialized) return;
+            GlobalVariables.json.GiteeMode = GiteeMode.IsChecked ?? false;
             SaveJson();
         }
     }

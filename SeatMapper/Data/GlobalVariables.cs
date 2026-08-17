@@ -1,4 +1,16 @@
-﻿using System;
+﻿// /*
+//  * SeatMapper
+//  * Copyright (C) 2026 haaa4
+//  *
+//  * This program is free software: you can redistribute it and/or modify
+//  * it under the terms of the GNU General Public License as published by
+//  * the Free Software Foundation, either version 3 of the License, or
+//  * (at your option) any later version.
+//  *
+//  * This program is distributed in the hope that it will be useful,
+//  * but WITHOUT ANY WARRANTY
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +34,14 @@ namespace SeatMapper
         /// 储存在json文件中的数据
         /// </summary>
         public static Json json { get; set; }
+
     }
     public class Json
     {
+        /// <summary>
+        /// 启用国内镜像地址
+        /// </summary>
+        public bool? GiteeMode { get; set; }
         /// <summary>
         /// 黑名单
         /// </summary>
