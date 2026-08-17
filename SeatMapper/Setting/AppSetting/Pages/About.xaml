@@ -1,0 +1,94 @@
+﻿<Page x:Class="SeatMapper.Setting.AppSetting.Pages.About"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SeatMapper.Setting.AppSetting.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="About">
+
+    <Grid>
+        <Grid>
+            <StackPanel>
+                <ui:Image
+                Height="250"
+                Margin="12"
+                HorizontalAlignment="Left"
+                Source="/Image/海报.png" />
+                <Expander Margin="12,0,12,0">
+                    <Expander.Header>
+                        <StackPanel>
+                            <ui:Image
+                            Width="30"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            Source="/Image/icon.png" />
+                            <TextBlock FontSize="30" Text="SeatMapper" />
+                        </StackPanel>
+                    </Expander.Header>
+                    <StackPanel>
+                        <TextBlock Text="V0.1" />
+                        <TextBlock Text="Made by Haaa4" />
+                    </StackPanel>
+                </Expander>
+                <Expander Margin="12,0">
+                    <Expander.Header>
+                        <TextBlock>
+                        <Run FontSize="30" Text="关于作者" />
+                        </TextBlock>
+                    </Expander.Header>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:Image
+                        x:Name="HeadImage"
+                        Width="100"
+                        Height="100"
+                        Margin="20" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock TextWrapping="Wrap">
+                            <Run FontSize="30" Text="haaa4" />
+                            <Run FontSize="20" Text="因为祂永远不会放弃你，永远不会令你沮丧，永远不会抛弃你，永远不会让你哭，永远不会同你道别，永远不会用谎言伤害你。" />
+                            </TextBlock>
+                            <ui:HyperlinkButton
+                            Content="作者B站"
+                            Icon="{ui:SymbolIcon Link24}"
+                            NavigateUri="https://space.bilibili.com/1440486452" />
+                            <ui:HyperlinkButton
+                            Content="作者Github"
+                            Icon="{ui:SymbolIcon Link24}"
+                            NavigateUri="https://github.com/haaa4" />
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+                <Expander Margin="12,0">
+                    <Expander.Header>
+                        <TextBlock>
+                        <Run FontSize="30" Text="其他链接" />
+                        </TextBlock>
+                    </Expander.Header>
+                    <StackPanel>
+                        <ui:HyperlinkButton
+                        Content="Github主页"
+                        Icon="{ui:SymbolIcon Link24}"
+                        NavigateUri="https://github.com/haaa4/NameCube" />
+                        <ui:HyperlinkButton
+                        Content="Gitee主页"
+                        Icon="{ui:SymbolIcon Link24}"
+                        NavigateUri="https://gitee.com/haaa4/NameCube" />
+                        <ui:HyperlinkButton
+                        Content="WPF UI"
+                        Icon="{ui:SymbolIcon Link24}"
+                        NavigateUri="https://github.com/lepoco/wpfui/tree/main" />
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Page>

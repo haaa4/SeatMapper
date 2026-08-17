@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="SeatMapper.Setting.ArchivalEditor.Pages.FixedText"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SeatMapper.Setting.ArchivalEditor.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="FixedText"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <ui:Card
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="     在座位表中，部分单元格可以被替换成指定文字，用“/text1”等在表格模版中替换，SeatMapper会在生成时对指定单元格进行替换。{year}：当前年份 {month} :当前月份 {day}：当前日 {week}：当前周数 {hour}：当前时（24h制） {min}：当前分 {sec}：当前秒 {time}:完整时间 {name}：当前用户名 {male}：男生人数 {female}：女生人数 {person}：总人数" TextWrapping="Wrap" />
+
+            </StackPanel>
+        </ui:Card>
+        <ui:Card
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+            <StackPanel>
+                <ui:TextBox x:Name="Text1" PlaceholderText="/Text1" />
+                <ui:TextBox x:Name="Text2" PlaceholderText="/Text2" />
+                <ui:TextBox x:Name="Text3" PlaceholderText="/Text3" />
+                <ui:Button
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Right"
+                    Click="SaveButton_Click"
+                    Content="保存" />
+            </StackPanel>
+        </ui:Card>
+    </StackPanel>
+</Page>

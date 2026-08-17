@@ -1,0 +1,91 @@
+﻿<Page
+    x:Class="SeatMapper.Setting.AppSetting.Pages.MiscellaneousSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SeatMapper.Setting.AppSetting.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="MiscellaneousSettings"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Unloaded="Page_Unloaded"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <ui:CardControl
+            Margin="4"
+            Padding="20,10,20,10"
+            Icon="{ui:SymbolIcon Symbol=WeatherMoon24}">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <ui:TextBlock
+                        Margin="0"
+                        FontTypography="BodyStrong"
+                        Text="应用主题"
+                        TextWrapping="WrapWithOverflow" />
+                    <ui:TextBlock
+                        Appearance="Secondary"
+                        Text="可更换应用的主题色调,有时需要重新打开窗口才能生效"
+                        TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ComboBox
+                x:Name="AppThemeComboBox"
+                HorizontalAlignment="Right"
+                SelectedIndex="0"
+                SelectionChanged="AppThemeComboBox_SelectionChanged">
+                <ComboBoxItem Content="跟随系统" />
+                <ComboBoxItem Content="浅色" />
+                <ComboBoxItem Content="深色" />
+            </ComboBox>
+        </ui:CardControl>
+        <ui:CardControl
+            Margin="4"
+            Padding="20,10,20,10"
+            Icon="{ui:SymbolIcon Symbol=CalendarArrowCounterclockwise24}">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <ui:TextBlock
+                        Margin="0"
+                        FontTypography="BodyStrong"
+                        Text="学期开始时间"
+                        TextWrapping="WrapWithOverflow" />
+                    <ui:TextBlock
+                        Appearance="Secondary"
+                        Text="SeatMapper将以改日所在的周作为第一周，来计算当前周数"
+                        TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+
+            </ui:CardControl.Header>
+            <ui:CalendarDatePicker
+                x:Name="SemesterStartDatePicker"
+                HorizontalAlignment="Right"
+                Content="{Binding ElementName=SemesterStartDatePicker, Path=Date}" />
+        </ui:CardControl>
+        <ui:CardControl
+            Margin="4"
+            Padding="20,10,20,10"
+            Icon="{ui:SymbolIcon Symbol=AlignTop24}">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <ui:TextBlock
+                        Margin="0"
+                        FontTypography="BodyStrong"
+                        Text="最大尝试次数"
+                        TextWrapping="WrapWithOverflow" />
+                    <ui:TextBlock
+                        Appearance="Secondary"
+                        Text="SeatMapper计算座位表时试错的最大次数"
+                        TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+
+            </ui:CardControl.Header>
+            <ui:NumberBox
+                x:Name="AttemptsTimes"
+                Maximum="2147483646"
+                Minimum="10"
+                ValueChanged="AttemptsTimes_ValueChanged" />
+        </ui:CardControl>
+    </StackPanel>
+</Page>

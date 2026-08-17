@@ -1,0 +1,21 @@
+﻿<Page x:Class="SeatMapper.Setting.ArchivalEditor.Pages.TableTemplate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SeatMapper.Setting.ArchivalEditor.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TableTemplate">
+
+    <Grid>
+        <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10">
+            <StackPanel>
+                <TextBlock Text="     表格模板是用于生成座位表模板，SeatMapper会根据表格内容标示的标识符替换成对应名字，而其他字符，单位格大小，主题等则不会修改。标识符：\m 男生；\f 女生；\r 随机; \=XX 类型必须与XX格相同   修改后务必保存，在点击主界面的“初始化”按钮" TextWrapping="Wrap"/>
+                <ui:Button Content="编辑表格模板" HorizontalAlignment="Right" Margin="0 10 0 0" Click="EditButton_Click"/> 
+            </StackPanel>
+   
+        </ui:Card>
+    </Grid>
+</Page>
