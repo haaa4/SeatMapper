@@ -38,6 +38,7 @@ namespace SeatMapper.Setting.AppSetting.Pages
             SemesterStartDatePicker.Date = GlobalVariables.json.SemesterStartDate ?? DateTime.Now.Date;
             AttemptsTimes.Value = GlobalVariables.json.MaximumNumberOfAttempts;
             GiteeMode.IsChecked = GlobalVariables.json.GiteeMode ?? false;
+            TimerInterval.Value=GlobalVariables.json.TimerInterval ?? 500;
             isInitialized = true;
             if (AttemptsTimes.Value <= 10)
             {
@@ -111,6 +112,13 @@ namespace SeatMapper.Setting.AppSetting.Pages
         {
             if (!isInitialized) return;
             GlobalVariables.json.GiteeMode = GiteeMode.IsChecked ?? false;
+            SaveJson();
+        }
+
+        private void TimerInterval_ValueChanged(object sender, NumberBoxValueChangedEventArgs args)
+        {
+            if (!isInitialized) return;
+            GlobalVariables.json.TimerInterval = TimerInterval.Value.Value.ToInt32();
             SaveJson();
         }
     }

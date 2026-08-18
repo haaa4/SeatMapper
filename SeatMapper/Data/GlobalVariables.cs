@@ -77,6 +77,10 @@ namespace SeatMapper
         /// 最大尝试次数
         /// </summary>
         public int MaximumNumberOfAttempts { get; set; }
+        /// <summary>
+        /// 轮转时间间隔
+        /// </summary>
+        public int? TimerInterval { get; set; }
     }
 
     public class BlackList

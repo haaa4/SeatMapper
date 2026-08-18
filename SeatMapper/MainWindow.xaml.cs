@@ -24,9 +24,11 @@ using System.Windows.Input;
 using unvell.ReoGrid.IO;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
+using MoreLinq;
 using MessageBox = System.Windows.MessageBox;
 using MessageBoxButton = System.Windows.MessageBoxButton;
 using Path = System.IO.Path;
+
 
 namespace SeatMapper
 {
@@ -35,10 +37,53 @@ namespace SeatMapper
     /// </summary>
     public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
     {
+        System.Timers.Timer timer = new System.Timers.Timer();
         public MainWindow()
         {
             InitializeComponent();
-            Refresh();
+            Refresh();   
+            timer.Interval = 500;
+            timer.Elapsed += Timer_Elapsed; 
+            timer.AutoReset = true;
+            timer.Enabled = false;
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    grid.Load(Path.Combine(GlobalVariables.DataPath, "Backup.xlsx"), FileFormat.Excel2007);
+                    GenerateSeating();
+                });
+            }
+            catch (Exception ex)
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    CaseText.Text = "生成失败！重新生成请按初始化按钮";
+                    RotateButton.Content = "开始轮转";
+                    SaveButton.IsEnabled = true;
+                    GenerateButton.IsEnabled = true;
+                    InitializeButton.IsEnabled = true;
+                    AechivalEditorButton.IsEnabled = true;
+                    AppSettingButton.IsEnabled = true;
+                    timer.Stop();
+                    timer.Enabled =false;
+                });
+                MessageBox.Show($"生成失败：{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                //还原名单
+                GlobalVariables.MaleList = maleBackup;
+                GlobalVariables.FemaleList = femaleBackup;
+                this.Dispatcher.Invoke(() =>
+                {
+                    grid.Visibility = Visibility.Visible;
+                });
+            }
         }
 
         // 占位符类型
@@ -159,6 +204,7 @@ namespace SeatMapper
             }
             try
             {
+                Directory.CreateDirectory(GlobalVariables.DataPath);
                 //添加男女名单
                 if (File.Exists(Path.Combine(GlobalVariables.DataPath, "男.txt")) == false)
                 {
@@ -269,18 +315,26 @@ namespace SeatMapper
             {
                 GenerateButton.IsEnabled = false;
                 grid.Visibility = Visibility.Hidden;
-                //先备份当前表格
-                grid.Save(Path.Combine(GlobalVariables.DataPath, "Backup.xlsx"), FileFormat.Excel2007);
-                int result = GenerateSeating();
+                if(RefreshMode!=2)
+                {
+                    //先备份当前表格
+                    grid.Save(Path.Combine(GlobalVariables.DataPath, "Backup.xlsx"), FileFormat.Excel2007);
+                }
+                else
+                {
+                    grid.Load(Path.Combine(GlobalVariables.DataPath, "Backup.xlsx"), FileFormat.Excel2007);
+                }
+                    int result = GenerateSeating();
                 CaseText.Text = "生成成功！你可自行调整，然后请务必保存座位表。重新生成请按初始化按钮";
-                var snackbar = new Snackbar(snackbarPresenter)
+                var snackBar = new Snackbar(snackbarPresenter)
                 {
                     Content = "生成成功", // 设置提示内容
                     Title = "成功",
                     Appearance = ControlAppearance.Success,
                     Timeout = TimeSpan.FromSeconds(3) // 显示时长
                 };
-                snackbar.Show();
+                snackBar.Show();
+                GenerateButton.IsEnabled = true;
                 SaveButton.IsEnabled = true;
             }
             catch (Exception ex)
@@ -290,6 +344,9 @@ namespace SeatMapper
             }
             finally
             {
+                //还原名单
+                GlobalVariables.MaleList = maleBackup;
+                GlobalVariables.FemaleList = femaleBackup;
                 grid.Visibility = Visibility.Visible;
                 RefreshMode = 2;
             }
@@ -332,7 +389,7 @@ namespace SeatMapper
                 MessageBox.Show($"保存失败：{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        List<string> maleBackup,femaleBackup;
         /// <summary>
         /// 生成座位表：根据标记替换姓名，满足性别匹配、名字不重复、黑名单同桌距离约束。
         /// 同时支持固定文本替换：\Text1、\Text2、\Text3。
@@ -340,6 +397,11 @@ namespace SeatMapper
         /// <returns>成功返回 0，失败抛出异常</returns>
         public int GenerateSeating()
         {
+            //0. 第一次打乱姓名表
+            maleBackup = GlobalVariables.MaleList;
+            femaleBackup = GlobalVariables.FemaleList;
+            GlobalVariables.MaleList.Shuffle();
+            GlobalVariables.FemaleList.Shuffle();
             // 1. 获取当前工作表
             var sheet = grid.CurrentWorksheet;
             if (sheet == null)
@@ -852,6 +914,46 @@ namespace SeatMapper
 
             // 相对周数 = 周数差 + 1
             return weekDiff + 1;
+        }
+        
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if(RotateButton.Content.ToString()=="开始轮转")
+            {
+                //先备份当前表格
+                if(RefreshMode!=2)  grid.Save(Path.Combine(GlobalVariables.DataPath, "Backup.xlsx"), FileFormat.Excel2007);
+                RotateButton.Content = "结束轮转";
+                CaseText.Text = "轮转中...";
+                timer.Interval = GlobalVariables.json.TimerInterval ?? 500;
+                SaveButton.IsEnabled = false;
+                GenerateButton.IsEnabled = false;
+                InitializeButton.IsEnabled = false;
+                AechivalEditorButton.IsEnabled = false;
+                AppSettingButton.IsEnabled = false;
+                timer.Enabled = true;
+                timer.Start();
+            }
+            else
+            {
+                RotateButton.Content = "开始轮转";
+                SaveButton.IsEnabled = true;
+                GenerateButton.IsEnabled = true;
+                InitializeButton.IsEnabled = true;
+                AechivalEditorButton.IsEnabled = true;
+                AppSettingButton.IsEnabled = true;
+                timer.Enabled = false;
+                timer.Stop();
+                RefreshMode = 2;
+                CaseText.Text = "生成成功！你可自行调整，然后请务必保存座位表。重新生成请按初始化按钮";
+                var snackBar = new Snackbar(snackbarPresenter)
+                {
+                    Content = "生成成功", // 设置提示内容
+                    Title = "成功",
+                    Appearance = ControlAppearance.Success,
+                    Timeout = TimeSpan.FromSeconds(3) // 显示时长
+                };
+                snackBar.Show();
+            }
         }
 
         /// <summary>

@@ -32,7 +32,7 @@
                         </StackPanel>
                     </Expander.Header>
                     <StackPanel>
-                        <TextBlock Text="V0.1" />
+                        <TextBlock Text="V0.2" />
                         <TextBlock Text="Made by Haaa4" />
                     </StackPanel>
                 </Expander>

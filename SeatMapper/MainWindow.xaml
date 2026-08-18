@@ -22,19 +22,20 @@
             <ui:SnackbarPresenter x:Name="snackbarPresenter" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Right" Width="400" />
             <ui:TitleBar Title="SeatMapper" Icon="{ui:ImageIcon /Image/icon.png}" />
             <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="2">
-                <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ui:Button Content="生成座位表" Margin="20,0,0,0" Icon="{ui:SymbolIcon Symbol=Document20}" Click="GenerateButton_Click" x:Name="GenerateButton" Appearance="Primary" VerticalAlignment="Bottom" />
-                    <ui:Button Content="保存" Margin="180 0 0 0" Icon="{ui:SymbolIcon Symbol=Document20}" Click="SaveButton_Click" x:Name="SaveButton" Appearance="Success" />
-                    <ui:TextBlock Text="正在初始化..." HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="24" x:Name="CaseText" />
-                </Grid>
+                <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal">
+                    <ui:Button Content="生成座位表" Margin="20 0 0 0"  Icon="{ui:SymbolIcon Symbol=Document20}" Click="GenerateButton_Click" x:Name="GenerateButton" Appearance="Primary" VerticalAlignment="Bottom" />
+                    <ui:Button Content="开始轮转" Margin="20 0 0 0" Click="Button_Click_2" x:Name="RotateButton"/>
+                    <ui:Button Content="保存" Margin="20 0 0 0"  Icon="{ui:SymbolIcon Symbol=Document20}" Click="SaveButton_Click" x:Name="SaveButton" Appearance="Success" />
+                    <ui:TextBlock Text="正在初始化..." Margin="20 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="24" x:Name="CaseText" />
+                </StackPanel>
             </ui:Card>
             <ui:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="3">
                 <StackPanel Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal">
-                    <ui:Button Content="初始化" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ArrowCounterclockwise24}" Click="InitializeButton_Click" Appearance="Info" />
-                    <ui:Button Content="档案编辑" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ContactCardGroup24}" Click="Button_Click" />
-                    <ui:Button Content="应用设置" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=Settings24}" Click="Button_Click_1" />
+                    <ui:Button Content="初始化" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ArrowCounterclockwise24}" Click="InitializeButton_Click" Appearance="Info" x:Name="InitializeButton"/>
+                    <ui:Button Content="档案编辑" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=ContactCardGroup24}" Click="Button_Click" x:Name="AechivalEditorButton"/>
+                    <ui:Button Content="应用设置" Margin="20 0 0 0" Icon="{ui:SymbolIcon Symbol=Settings24}" Click="Button_Click_1" x:Name="AppSettingButton"/>
                     <TextBlock VerticalAlignment="Center" Margin="20 0 0 0">
-                <Run Text="V0.1 " />
+                <Run Text="V0.2 " />
                 <Run Text="Copyright (C) 2026 haaa4 部分权利保留 LICENSE GPL-3.0" />
                     </TextBlock>
                 </StackPanel>

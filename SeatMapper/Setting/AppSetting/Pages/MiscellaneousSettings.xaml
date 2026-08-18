@@ -88,6 +88,29 @@
         <ui:CardControl
     Margin="4"
     Padding="20,10,20,10"
+    Icon="{ui:SymbolIcon Symbol=Timer24}">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <ui:TextBlock
+                Margin="0"
+                FontTypography="BodyStrong"
+                Text="轮转间隔"
+                TextWrapping="WrapWithOverflow" />
+                    <ui:TextBlock
+                Appearance="Secondary"
+                Text="SeatMapper轮转时间间隔，单位毫秒(1000毫秒=1秒）,请根据电脑计算速度自行设定"
+                TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:NumberBox
+        x:Name="TimerInterval"
+        Maximum="10000"
+        Minimum="100"
+        ValueChanged="TimerInterval_ValueChanged" />
+        </ui:CardControl>
+        <ui:CardControl
+    Margin="4"
+    Padding="20,10,20,10"
     Icon="{ui:SymbolIcon Symbol=Wifi120}">
             <ui:CardControl.Header>
                 <StackPanel>
